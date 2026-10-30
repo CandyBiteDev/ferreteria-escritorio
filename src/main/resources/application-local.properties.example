@@ -1,0 +1,3 @@
+# Copiar este archivo como application-local.properties (no se sube a git)
+# y escribir la contraseña de tu MySQL local.
+spring.datasource.password=TU_CONTRASEÑA_DE_MYSQL
