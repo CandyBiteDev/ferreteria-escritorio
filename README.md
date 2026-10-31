@@ -25,11 +25,9 @@ Para correr solo la API: argumento `--sin-ventana`.
 
 ### App Android (Android Studio)
 1. Abrir `AndroidStudioProjects/FerreteriaMovil` y ejecutar en el celular o el emulador.
-2. En el login escribir el servidor:
-   - **Celular por Wi-Fi:** la IP que muestra el login del escritorio, ej. `192.168.3.87:8080`
-     (misma red Wi-Fi; si no conecta, permitir Java en el Firewall de Windows para redes privadas).
-   - **Celular por cable USB o emulador (lo más seguro):** ejecutar en una terminal
-     `adb reverse tcp:8080 tcp:8080` y escribir `127.0.0.1:8080`.
+2. En el login escribir como servidor la IP que muestra el login del escritorio, ej. `192.168.3.87:8080`.
+   Sirve igual en el celular (misma red Wi-Fi que la PC) y en el emulador. Si no conecta, permitir
+   Java en el Firewall de Windows para redes privadas.
 3. Botón **Probar conexión** para verificar antes de ingresar.
 
 ## 2. Usuarios de prueba (datos ficticios)
