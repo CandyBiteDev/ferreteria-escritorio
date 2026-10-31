@@ -46,9 +46,11 @@ public class PanelReportes extends JPanel {
         btnExportar.addActionListener(e -> Ui.exportarCsv(this, tabla, lblTitulo.getText()));
         cbTipo.addActionListener(e -> habilitarParametros());
 
-        JPanel filtros = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel filtros = WrapLayout.barra();
         filtros.add(new JLabel("Reporte:"));
         filtros.add(cbTipo);
+        filtros.add(btnGenerar);
+        filtros.add(btnExportar);
         filtros.add(new JLabel("Desde (aaaa-mm-dd):"));
         filtros.add(txtDesde);
         filtros.add(new JLabel("Hasta:"));
@@ -57,8 +59,6 @@ public class PanelReportes extends JPanel {
         filtros.add(cbBodega);
         filtros.add(new JLabel("Días sin mov.:"));
         filtros.add(spDias);
-        filtros.add(btnGenerar);
-        filtros.add(btnExportar);
 
         JPanel norte = new JPanel(new BorderLayout());
         norte.add(Ui.encabezado("Reportes", "Visualizables en pantalla y exportables a CSV (Excel)"), BorderLayout.NORTH);

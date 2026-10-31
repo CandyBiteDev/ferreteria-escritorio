@@ -46,7 +46,7 @@ public class PanelExistencias extends JPanel {
         JButton btnExportar = Ui.boton("Exportar CSV");
         btnExportar.addActionListener(e -> Ui.exportarCsv(this, tabla, "existencias"));
 
-        JPanel filtros = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel filtros = WrapLayout.barra();
         filtros.add(new JLabel("Bodega:"));
         filtros.add(cbBodega);
         filtros.add(txtBuscar);

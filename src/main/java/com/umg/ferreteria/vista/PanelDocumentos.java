@@ -45,7 +45,7 @@ public abstract class PanelDocumentos<D extends Documento<? extends DetalleDocum
         System.arraycopy(estados, 0, opciones, 1, estados.length);
         cbEstado = new JComboBox<>(opciones);
 
-        JPanel filtros = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel filtros = WrapLayout.barra();
         filtros.add(new JLabel("Estado:"));
         filtros.add(cbEstado);
         txtBuscar.putClientProperty("JTextField.placeholderText", "Buscar...");

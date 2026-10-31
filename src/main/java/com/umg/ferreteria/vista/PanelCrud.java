@@ -28,7 +28,7 @@ public abstract class PanelCrud<T extends EntidadBase> extends JPanel {
     protected final DefaultTableModel modelo;
     protected final JTable tabla;
     protected final JTextField txtBuscar = new JTextField(22);
-    protected final JPanel barraFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+    protected final JPanel barraFiltros = WrapLayout.barra();
     protected List<T> datos = new ArrayList<>();
     protected T seleccionado;
     private final String titulo;
