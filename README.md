@@ -12,7 +12,12 @@ existencias por bodega, compras, ventas/cotizaciones, devoluciones, transferenci
    junto al `pom.xml` y cambiar el valor por la contraseña de tu MySQL. Ese archivo está en el
    `.gitignore` y nunca se sube. Si falta, al iniciar sesión aparece
    *"MySQL rechazó el usuario o la contraseña"*.
-3. Abrir el proyecto en IntelliJ y ejecutar `FerreteriaApplication` (JDK 25).
+3. Abrir el proyecto en IntelliJ y ejecutar `FerreteriaApplication` (JDK 25). Si se descargó como ZIP:
+   - **File › Open…** y elegir la carpeta que contiene `pom.xml` (si el ZIP quedó con una carpeta dentro de otra, la de adentro).
+   - Si aparece *"Cannot resolve symbol"* o arriba dice *"Add Configuration"*: clic derecho en `pom.xml` ›
+     **Add as Maven Project** (o en el aviso *"Maven build script found"*, **Load Maven Project**) y esperar a que
+     termine de descargar dependencias.
+   - En **File › Project Structure › Project › SDK** debe estar un JDK 25 (si no hay, **Download JDK…**).
 4. **La primera vez** la app detecta que falta el esquema y ejecuta `sql/db_ferreteria.sql`
    (crea la base `db_ferreteria` con 22 tablas y datos de prueba). Después crea los usuarios
    y operaciones de demostración.
