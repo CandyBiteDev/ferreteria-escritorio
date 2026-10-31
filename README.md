@@ -112,12 +112,30 @@ Devoluciones · Ajustes · Bitácora de auditoría.
 9. **Auditoría** (como admin o supervisor): reporte "Bitácora de auditoría" con todo lo anterior.
 
 ## 7. Pruebas automatizadas
-`src/test/java/com/umg/ferreteria/ReglasNegocioTest.java`: 16 pruebas JUnit 5 de las reglas de negocio,
-permisos, rollback y la falla controlada de persistencia (+1 de arranque). Corren contra la base
-`db_ferreteria_test`, que se recrea en cada ejecución; `db_ferreteria` no se toca.
+22 pruebas JUnit 5 en `src/test/java/com/umg/ferreteria`:
+- `ReglasNegocioTest` (16): reglas de negocio, permisos, rollback y la falla controlada de persistencia,
+  contra la base `db_ferreteria_test`, que se recrea en cada ejecución (`db_ferreteria` no se toca).
+- `InventarioMemoriaTest` (5): la versión en memoria de la Entrega 2; no necesita MySQL.
+- `FerreteriaApplicationTests` (1): la aplicación arranca.
+
 En IntelliJ: clic derecho en `src/test/java` › *Run 'All Tests'*, o en la terminal `mvnw test`.
 
-## 8. Entregables
+## 8. Versión en memoria (Entrega 2: listas de objetos)
+La guía pide una versión que opere **con listas de objetos (ArrayList) sin base de datos** antes de pasar a JDBC.
+Está en el paquete `com.umg.ferreteria.memoria`:
+
+| Clase | Qué hace |
+| --- | --- |
+| `RepositorioMemoria<T>` | Lista genérica (`ArrayList`) con alta, cambio, baja, búsqueda e ids autoincrementales |
+| `InventarioMemoria` | Mismas reglas de negocio sobre listas: no hay stock negativo, la venta se aplica completa o no se aplica, la transferencia tiene salida y recepción separadas, el código de producto es único |
+| `VentanaMemoria` | Interfaz Swing con pestañas Productos (ABC + búsqueda), Existencias, Ventas, Transferencias y Clientes/proveedores (polimorfismo con `List<Persona>`) |
+| `FerreteriaMemoriaApp` | Punto de entrada; no usa Spring ni MySQL |
+
+**Ejecutarla:** abrir `FerreteriaMemoriaApp` y presionar el ▶ verde junto a `main`. Funciona sin MySQL y los
+datos se pierden al cerrar. Usa las mismas clases del modelo (herencia, clases abstractas, `validar()` polimórfico)
+y las mismas excepciones propias que la versión final.
+
+## 9. Entregables
 - Script SQL: `sql/db_ferreteria.sql` (22 tablas con PK/FK y datos de prueba).
 - Respaldo: desde MySQL Workbench *Server > Data Export* de `db_ferreteria`.
 - Código fuente: este proyecto + `FerreteriaMovil`.
