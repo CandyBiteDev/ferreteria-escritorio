@@ -47,6 +47,17 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<!-- El script de la base viaja dentro de la app (classpath: sql/db_ferreteria.sql),
+			     así se encuentra sin importar desde qué carpeta se ejecute -->
+			<resource>
+				<directory>sql</directory>
+				<targetPath>sql</targetPath>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

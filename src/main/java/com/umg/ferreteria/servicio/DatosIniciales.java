@@ -12,14 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 
@@ -69,22 +70,27 @@ public class DatosIniciales implements ApplicationRunner {
         }
     }
 
-    /** --reiniciar-bd: ejecuta sql/db_ferreteria.sql (borra y recrea la base con datos de prueba). */
+    /**
+     * --reiniciar-bd: ejecuta sql/db_ferreteria.sql (borra y recrea la base con datos de prueba).
+     * El script se toma de dentro de la app (Maven lo copia al classpath); si no está, de la carpeta sql/.
+     */
     private void reiniciarBaseDeDatos() {
-        File script = new File("sql/db_ferreteria.sql");
+        Resource script = new ClassPathResource("sql/db_ferreteria.sql");
+        if (!script.exists()) script = new FileSystemResource("sql/db_ferreteria.sql");
         if (!script.exists()) {
-            log.error("No se encontró {}. Ejecute la app desde la carpeta del proyecto.", script.getAbsolutePath());
-            return;
+            throw new IllegalStateException("No se encontró el script sql/db_ferreteria.sql. "
+                    + "Ejecútalo manualmente en MySQL Workbench y vuelve a abrir la aplicación");
         }
+        Resource origen = script;
         db.consultar(cn -> {
             // El script crea "db_ferreteria"; se ejecuta sobre la base configurada (ej. db_ferreteria_test en pruebas)
             String base = cn.getCatalog();
-            log.warn("Reiniciando la base de datos {} con {}", base, script.getAbsolutePath());
+            log.warn("Reiniciando la base de datos {} con {}", base, origen.getDescription());
             String sql;
             try {
-                sql = Files.readString(script.toPath(), StandardCharsets.UTF_8).replace("db_ferreteria", base);
+                sql = origen.getContentAsString(StandardCharsets.UTF_8).replace("db_ferreteria", base);
             } catch (IOException e) {
-                throw new IllegalStateException("No se pudo leer " + script, e);
+                throw new IllegalStateException("No se pudo leer " + origen.getDescription(), e);
             }
             ScriptUtils.executeSqlScript(cn, new EncodedResource(new ByteArrayResource(sql.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8));
             return null;

@@ -26,7 +26,8 @@ public class PersistenciaException extends FerreteriaException {
             case 1451 -> "No se puede eliminar: el registro está siendo usado por otros datos.";
             case 1452 -> "Referencia inválida: el registro relacionado no existe.";
             case 3819 -> "La base de datos rechazó la operación por una restricción (ej. stock negativo).";
-            case 1146 -> "Falta una tabla. Ejecuta el script sql/db_ferreteria.sql.";
+            case 1146 -> "Faltan tablas en la base de datos. Cierra y vuelve a abrir la aplicación para que las cree; "
+                    + "si persiste, ejecuta sql/db_ferreteria.sql en MySQL Workbench (File > Open SQL Script y el rayo).";
             case 1049 -> "No existe la base db_ferreteria. Ejecuta el script sql/db_ferreteria.sql.";
             default -> "Error de base de datos: " + e.getMessage();
         };
