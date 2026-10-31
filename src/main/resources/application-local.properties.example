@@ -1,3 +1,6 @@
-# Copiar este archivo como application-local.properties (no se sube a git)
-# y escribir la contraseña de tu MySQL local.
-spring.datasource.password=TU_CONTRASEÑA_DE_MYSQL
+# PLANTILLA: no escribas tu clave real en este archivo (este si se sube a git).
+# 1. Copia este archivo con el nombre application-local.properties
+#    junto al pom.xml (o en esta misma carpeta src/main/resources).
+# 2. Cambia el valor de abajo por la clave de tu usuario root de MySQL.
+# Ese archivo esta en el .gitignore y nunca se sube a GitHub.
+spring.datasource.password=CAMBIAR_POR_TU_CLAVE_DE_MYSQL

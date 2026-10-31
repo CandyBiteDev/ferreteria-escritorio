@@ -6,15 +6,19 @@ existencias por bodega, compras, ventas/cotizaciones, devoluciones, transferenci
 ## 1. Cómo ejecutarlo
 
 ### Escritorio + API (IntelliJ)
-1. MySQL 8 debe estar corriendo. La contraseña de MySQL va en
-   `src/main/resources/application-local.properties` (este archivo **no** se sube a git).
-2. Abrir el proyecto en IntelliJ y ejecutar `FerreteriaApplication` (JDK 25).
-3. **La primera vez** la app detecta que falta el esquema y ejecuta `sql/db_ferreteria.sql`
+1. MySQL 8 debe estar corriendo (usuario `root`).
+2. **Configurar la contraseña de MySQL (obligatorio al descargar el proyecto):** copiar
+   `src/main/resources/application-local.properties.example` como **`application-local.properties`**
+   junto al `pom.xml` y cambiar el valor por la contraseña de tu MySQL. Ese archivo está en el
+   `.gitignore` y nunca se sube. Si falta, al iniciar sesión aparece
+   *"MySQL rechazó el usuario o la contraseña"*.
+3. Abrir el proyecto en IntelliJ y ejecutar `FerreteriaApplication` (JDK 25).
+4. **La primera vez** la app detecta que falta el esquema y ejecuta `sql/db_ferreteria.sql`
    (crea la base `db_ferreteria` con 22 tablas y datos de prueba). Después crea los usuarios
    y operaciones de demostración.
-4. Para dejar la base como nueva antes de la defensa: agregar en *Run > Edit Configurations >
+5. Para dejar la base como nueva antes de la defensa: agregar en *Run > Edit Configurations >
    Program arguments* el argumento `--reiniciar-bd`, ejecutar una vez y quitarlo.
-5. Se abre el login. La ventana muestra la IP que hay que escribir en la app móvil.
+6. Se abre el login. La ventana muestra la IP que hay que escribir en la app móvil.
 
 Un solo proceso levanta la ventana Swing **y** la API en el puerto 8080.
 Para correr solo la API: argumento `--sin-ventana`.
